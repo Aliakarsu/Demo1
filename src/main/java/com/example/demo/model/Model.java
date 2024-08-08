@@ -7,6 +7,7 @@ public class Model {
     private long id;
 
     private String name;
+    private String gender;
 
     public Model(String name) {
         this.name = name;
@@ -29,5 +30,13 @@ public class Model {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }

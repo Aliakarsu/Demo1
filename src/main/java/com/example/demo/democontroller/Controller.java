@@ -1,36 +1,36 @@
 package com.example.demo.democontroller;
 
+import com.example.demo.DemoService.DemoService;
 import com.example.demo.model.Model;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/api")
 public class Controller {
-    private static List<Model> names = new ArrayList<>();
 
+    private final DemoService demoService;
+
+    @Autowired
+    public Controller(DemoService demoService){
+        this.demoService = demoService;
+    }
 
     @PostMapping("/users")
     public Model addName(@RequestBody Model model) {
-        names.add(model);
-        return model;
+        return demoService.addName(model);
     }
 
-    @GetMapping
-    public List<Model> getNames() {
-        return names;
+    @GetMapping(path = "/users")
+    public List<Model> getUsers(@RequestParam(name = "name", required = false) String prefix,
+                                @RequestParam(name = "gender", required = false) String gender ) {
+        return demoService.getNamesStartingWith(prefix, gender);
     }
 
-    @GetMapping(path = "/bas-harf/{prefix}")
-    public List<Model> getNamesStartingWith(@PathVariable("prefix") String prefix) {
-        String lowerCasePrefix = prefix.toLowerCase();
-        return names.stream().filter(model -> model.getName().toLowerCase().startsWith(lowerCasePrefix)).collect(Collectors.toList());
-    }
     @GetMapping(path = "/id/{prefix2}")
     public Model getNameById (@PathVariable("prefix2") Long id) {
-        return names.stream().filter(model -> id.equals(model.getId())).findFirst().orElse(null);
+        return demoService.getNameById(id);
     }
 }
