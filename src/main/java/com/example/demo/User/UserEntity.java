@@ -1,19 +1,23 @@
-package com.example.demo.model;
+package com.example.demo.User;
 
+import jakarta.persistence.*;
 
-public class Model {
+@Entity
+@Table(name = "t_user")
+public class UserEntity {
 
-
-    private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String name;
     private String gender;
 
-    public Model(String name) {
+    public UserEntity(String name) {
         this.name = name;
     }
 
-    public Model() {
+    public UserEntity() {
     }
 
     public long getId() {
