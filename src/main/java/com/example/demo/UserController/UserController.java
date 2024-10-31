@@ -24,9 +24,9 @@ public class UserController {
     }
 
     @GetMapping(path = "/users")
-    public List<UserDto> getNamesStartingWith(@RequestParam(name = "name", required = false) String prefix,
+    public List<UserDto> getNamesStartingWith(@RequestParam(name = "name", required = false) String name,
                                               @RequestParam(name = "gender", required = false) String gender ) {
-        return userService.getNamesStartingWith(prefix, gender);
+        return userService.getNamesStartingWith(name, gender);
     }
 
     @GetMapping(path = "/id/{prefix2}")
