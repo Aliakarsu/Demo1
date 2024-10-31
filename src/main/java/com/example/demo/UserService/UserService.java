@@ -45,6 +45,9 @@ public class UserService implements IUser {
         if (name != null) {
             name = name.toLowerCase();
         }
+        if (gender != null) {
+            gender = gender.toLowerCase();
+        }
 
         List<UserEntity> users = UserRepository.findAll();
 
@@ -56,7 +59,7 @@ public class UserService implements IUser {
 
             if ((name == null || userName.toLowerCase().startsWith(name))
                     &&
-                    (gender == null || userGender.equals(gender))) {
+                    (gender == null || userGender.toLowerCase().startsWith(gender))) {
 
                 UserDto userDto = new UserDto();
                 userDto.setId(userEntity.getId());
