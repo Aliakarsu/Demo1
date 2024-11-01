@@ -17,7 +17,7 @@ PUT http://localhost:8080/api/id?id=19&name=B9&gender=male
 Content-Type: application/json
 
 ### GET User By Name And Gender
-GET http://localhost:8080/api/users
+GET http://localhost:8080/api/users?name=a&gender=f
 Content-Type: application/json
 
 ### GET User By Id
